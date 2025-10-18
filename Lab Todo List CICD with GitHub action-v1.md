@@ -1728,9 +1728,9 @@ https://flask-todo-app.onrender.com
 **เพิ่ม RENDER_DEPLOY_HOOK_URL และ RENDER_APP_URL บน GitHub Repository**
 **ทำการ push ไปที่ GitHub Repository** แล้วตรวจสอบผลการทำงาน
 ## บันทึกรูปผลการทำงาน
-```bash
-# บันทึกรูปผลการทำงานที่นี่
-``` 
+<img width="1920" height="1080" alt="Screenshot (31)" src="https://github.com/user-attachments/assets/8e98fa4a-f3e9-4aff-9ddd-b8d8750491f2" />
+
+
 
 ---
 
@@ -1895,13 +1895,13 @@ curl https://YOUR_RAILWAY_APP_URL/api/health
 
 ก่อน push code และ trigger GitHub Actions ให้ตรวจสอบ:
 
-- [ ] Render Database สร้างเสร็จและสถานะ "Available"
-- [ ] Render Web Service deploy สำเร็จและสถานะ "Live"
-- [ ] Railway Database และ Web Service ทำงานปกติ
-- [ ] สร้าง GitHub Secrets ครบ 5 ตัว
-- [ ] ทดสอบ health endpoints ของทั้ง Render และ Railway ได้
-- [ ] URL ไม่มี `/` ท้าย
-- [ ] DATABASE_URL ใช้ Internal URL (สำหรับ Render)
+- [✅] Render Database สร้างเสร็จและสถานะ "Available"
+- [✅] Render Web Service deploy สำเร็จและสถานะ "Live"
+- [✅] Railway Database และ Web Service ทำงานปกติ
+- [✅] สร้าง GitHub Secrets ครบ 5 ตัว
+- [✅] ทดสอบ health endpoints ของทั้ง Render และ Railway ได้
+- [✅] URL ไม่มี `/` ท้าย
+- [✅] DATABASE_URL ใช้ Internal URL (สำหรับ Render)
 
 ---
 
@@ -2118,36 +2118,44 @@ docker-compose up -d
 
 ## ส่วนที่ 10: การทดสอบและประเมินผล
 
+<img width="1920" height="1080" alt="Screenshot (32)" src="https://github.com/user-attachments/assets/87062378-a8ad-4c04-b748-b1510537feb7" />
+
 ### 10.1 Checklist การทดลอง
 
 ตรวจสอบว่าทำสำเร็จทุกข้อ:
 
-- [ ] สร้าง GitHub repository และ clone ลงเครื่อง
-- [ ] สร้าง Flask application ที่มี CRUD operations ครบถ้วน
-- [ ] เขียน tests ที่ครอบคลุม code coverage > 80%
-- [ ] สร้าง Dockerfile ที่ optimize แล้ว
-- [ ] สร้าง docker-compose.yml ที่แยก services
-- [ ] รัน application ด้วย Docker และทดสอบใน local สำเร็จ
-- [ ] สร้าง GitHub Actions workflow ที่มีทั้ง CI และ CD
-- [ ] Deploy ไปยัง Render สำเร็จ
-- [ ] Deploy ไปยัง Railway สำเร็จ
-- [ ] ทดสอบ API endpoints บน production
-- [ ] Health checks ทำงานถูกต้อง
-- [ ] Auto-deployment ทำงานเมื่อ push code ใหม่
+- [✅] สร้าง GitHub repository และ clone ลงเครื่อง
+- [✅] สร้าง Flask application ที่มี CRUD operations ครบถ้วน
+- [✅] เขียน tests ที่ครอบคลุม code coverage > 80%
+- [✅] สร้าง Dockerfile ที่ optimize แล้ว
+- [✅] สร้าง docker-compose.yml ที่แยก services
+- [✅] รัน application ด้วย Docker และทดสอบใน local สำเร็จ
+- [✅] สร้าง GitHub Actions workflow ที่มีทั้ง CI และ CD
+- [✅] Deploy ไปยัง Render สำเร็จ
+- [✅] Deploy ไปยัง Railway สำเร็จ
+- [✅] ทดสอบ API endpoints บน production
+- [✅] Health checks ทำงานถูกต้อง
+- [✅] Auto-deployment ทำงานเมื่อ push code ใหม่
 
 ### 10.2 คำถามทบทวน
 
 
 1. **Docker Architecture**:
    - เหตุใดจึงต้องแยก database และ application เป็นคนละ containers ?
+   - ตอบ เพราะเพื่อความเป็นอิสระในการจัดการและปรับขนาด (Scale) เช่น เพิ่ม Application Container โดยไม่กระทบ Database และเพื่อแยก ข้อมูลถาวร (Stateful) ออกจากโค้ด (Stateless) ทำให้จัดการข้อมูลปลอดภัยขึ้น
    - Multi-stage build มีประโยชน์อย่างไร?
+   - ตอบ ช่วยลดขนาด Final Docker Image ลง โดยการใช้ Stage แรกสำหรับ Build และ Stage สุดท้ายสำหรับ Runtime เท่านั้น ทำให้ Image เล็กมีความปลอดภัยขึ้น และ Deploy ได้เร็วขึ้น
 
 2. **Testing Strategy**:
    - การวัด code coverage มีความสำคัญอย่างไร?
+   - ตอบ ช่วยบ่งชี้ช่องว่างในชุดทดสอบ (Test Suite) ว่าโค้ดส่วนใดยังไม่ถูกทดสอบเลย ทำให้เราสามารถเพิ่มการทดสอบให้ครอบคลุม เพื่อเพิ่มความมั่นใจในการเปลี่ยนแปลงโค้ดและรักษาคุณภาพของซอฟต์แวร์
 
 3. **Deployment**:
    - Health check endpoint มีความสำคัญอย่างไร?
+   - ตอบ มีความสำคัญสำหรับตรวจสอบสถานะการทำงานของแอปพลิเคชันโดยอัตโนมัติ ช่วยให้ Load Balancer หยุดส่ง Traffic ไปยัง Instance ที่ล้มเหลว และใช้ในระบบ Orchestration (เช่น Kubernetes) เพื่อตัดสินใจว่าควร Restart หรือ Ready ที่จะรับ Traffic หรือไม่
    - Render และ Railway มีความแตกต่างกันอย่่างไร?
+   - ตอบ Render เน้นเป็นแพลตฟอร์มที่ ครอบคลุม (Comprehensive PaaS) มี Managed Database และการ Autoscaling ระดับ Production ที่ดี
+ส่วน Railway เน้น ความรวดเร็ว ในการ Deploy (Rapid Deployment) และใช้ระบบราคาแบบ Pay-as-you-go ที่ยืดหยุ่นกว่า แต่ฐานข้อมูลส่วนใหญ่เป็น Containerized ที่ต้องจัดการเอง
 
 
 ---
