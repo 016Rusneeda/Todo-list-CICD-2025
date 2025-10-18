@@ -1384,11 +1384,21 @@ start htmlcov/index.html  # Windows
 
 ## คำถามการทดลอง
 ให้จับคู่ Code ส่วนของการทดสอบ กับ Code การทำงาน มาอย่างน้อย 3 ฟังก์ชัน พร้อมอธิบายการทำงานของแต่ละกรณี
-```plaintext
-# ตอบคำถามที่นี่
+1. คู่ที่ 1 
+<img width="746" height="241" alt="image" src="https://github.com/user-attachments/assets/a810b0e3-90dc-4840-ae1a-1cfa72980116" />
+<img width="531" height="122" alt="image" src="https://github.com/user-attachments/assets/80dfeddd-3dcb-4223-adac-0add0effd37b" />
+การทำงาน : ฟังก์ชัน health() เป็น endpoint ตรวจสอบสถานะระบบของ Flask API เมื่อถูกเรียกด้วย GET /api/health จะตอบกลับ JSON {"status": "ok"} พร้อมรหัสสถานะ 200 OK
+( เทสตรวจสอบว่าระบบตอบตามที่คาดไว้ หมายถึงแอปสามารถรันได้ตามปกติและเชื่อมต่อฐานข้อมูลสำเร็จ )
 
+2. คู่ที่ 2
+<img width="711" height="234" alt="image" src="https://github.com/user-attachments/assets/b2146bb3-6967-479f-a0ea-42a28cfbeb62" />
+<img width="792" height="371" alt="image" src="https://github.com/user-attachments/assets/868a1440-251a-4408-b8ed-43711df0a0fd" />
+การทำงาน : ฟังก์ชัน get_todos() ดึงรายการ Todo ทั้งหมดจากฐานข้อมูล ถ้าไม่มีข้อมูล จะส่งคืน list ว่าง ([]) พร้อม count = 0  (เทสตรวจสอบว่า API คืนข้อมูลถูกต้องในกรณีฐานข้อมูลว่าง)
 
-```
+3. คู่ที่ 3
+<img width="733" height="178" alt="image" src="https://github.com/user-attachments/assets/cc9485a2-403c-4da5-927c-c2acf1d4ae22" />
+<img width="635" height="357" alt="image" src="https://github.com/user-attachments/assets/1ae88238-d6e8-4748-8e92-bceaa55f24f1" />
+การทำงาน : ใช้ตรวจสอบการดึง todo รายการเดียวหาก id ไม่ถูกต้อง ให้ส่ง 404 เป็นการเทสพฤติกรรม “not found” ของระบบ
 
 
 ### ขั้นตอนที่ 5.4: Cleanup  (ไม่ต้องทดลอง สามารถข้ามได้)
